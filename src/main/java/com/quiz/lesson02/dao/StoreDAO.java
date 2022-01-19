@@ -10,5 +10,5 @@ import com.quiz.lesson02.model.Store;
 @Repository
 public interface StoreDAO {
 
-	public List<Store> selectStoreList();	
+	public List<Store> selectStoreList(); // 쿼리를 부르는 매핑 	
 } 

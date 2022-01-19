@@ -12,7 +12,7 @@ import com.quiz.lesson02.model.Store;
 public class StoreBO {
 	
 	@Autowired
-	private StoreDAO storeDAO;
+	private StoreDAO storeDAO; 
 	
 	public List<Store> getStoreList(){
 		return storeDAO.selectStoreList();
