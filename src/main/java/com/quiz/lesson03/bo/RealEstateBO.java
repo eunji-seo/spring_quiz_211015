@@ -14,7 +14,7 @@ public class RealEstateBO {
 	@Autowired
 	private RealEstateDAO realEstateDAO;
 	
-	public List<RealEstate> getRealEstateList(){
-		return realEstateDAO.selectRealEstateList();
+	public List<RealEstate> getRealEstateList(int area ,int price){
+		return realEstateDAO.selectRealEstateList(area, price);
 	}
 }

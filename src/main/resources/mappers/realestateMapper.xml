@@ -6,7 +6,21 @@
  	<select id="selectRealEstateList" 
  	parameterType="int"
  	resultType="com.quiz.lesson03.model.RealEstate">
- 	
+ 	SELECT
+ 		`id`
+		,`realtorId`
+		,`address`
+		,`area`
+		,`type`
+		,`price`
+		,`rentPrice`
+		,`createdAt`
+		,`updatedAt`
+	FROM
+		`real_estate`
+	WHERE
+		area = #{area} and price = #{price}
+		
  	
  	</select>
  </mapper>
