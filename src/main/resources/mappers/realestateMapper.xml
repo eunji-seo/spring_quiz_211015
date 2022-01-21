@@ -65,27 +65,27 @@
  	</select>
  	<insert id="insertRealEstate" parameterType="com.quiz.lesson03.model.RealEstate">
  	INSERT INTO `real_estate`
- 	(
- 		`realtorId`
-		,`address`
-		,`area`
-		,`type`
-		,`price`
-		,`rentPrice`
-		,`createdAt`
-		,`updatedAt`
- 	)
- 	VAULES
- 	(
- 		#{realtorId}
- 		, #{address}
- 		, #{area}
- 		, #{type}
- 		, #{price}
- 		, #{rentPrice}
- 		, NOW()
- 		, NOW()
- 	)
+ 		(
+			`realtorId`
+			,`address`
+			,`area`
+			,`type`
+			,`price`
+			,`rentPrice`
+			,`createdAt`
+			,`updatedAt`
+ 		)
+ 		VALUES <!-- getter 를 사용하여 수행됨 -->
+ 		(
+ 			#{realtorId}
+ 			, #{address}
+ 			, #{area}
+ 			, #{type}
+ 			, #{price}
+ 			, #{rentPrice} 			
+ 			, NOW()
+ 			, NOW()
+ 		)
  	
  	</insert>
  </mapper>

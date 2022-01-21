@@ -22,6 +22,8 @@ public class RealEstateQuiz02RestControllet {
 		realEstate.setArea(89);
 		realEstate.setType("매매");
 		realEstate.setPrice(100000);
+		realEstate.setRentPrice(null);
+		
 		int rowCount = realEstateBO.addRealEstate(realEstate);
 		return "입력성공:" + rowCount;
 	}
