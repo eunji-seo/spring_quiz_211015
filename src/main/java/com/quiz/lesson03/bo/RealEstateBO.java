@@ -38,7 +38,7 @@ public class RealEstateBO {
 		return realEstateDAO.updateRealEstateById(id, type, price);
 	}
 	
-	public int deleteRealEstateById(int id) {
+	public int deleteRealEstateById(int id) { // ctrl + alt + h => call depth (을 생각하고 설계을 해야함)
 		return realEstateDAO.deleteRealEstateById(id);
 	}
 }
