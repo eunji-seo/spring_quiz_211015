@@ -17,6 +17,7 @@
 	<div class="container">
 
 		<h1>판매자 정보</h1>
+		
 		<div><img src=${result.profileImageUrl} alt="프로필"></div>
 		<div class="text-secondary">${result.nickname}</div>
 		<div>${result.temperature}</div>

@@ -45,16 +45,19 @@ public class SellerController {
 	//http://localhost/lesson04/quiz01/seller_info
 	@GetMapping("/seller_info")
 	public String seller_info(Model model ,
-			@RequestParam("id") int id
+			@RequestParam(value = "id", required = false) Integer id
 			) {
 		
-		Seller LastSeller = sellerBO.getLastSeller();
-		Seller SellerId = sellerBO.getSeller(id);
 		
-		model.addAttribute("result", LastSeller);
-		model.addAttribute("result2", SellerId);
-		
-		
+		if(id == null) {
+			Seller LastSeller = sellerBO.getLastSeller();
+			model.addAttribute("result", LastSeller);
+				
+		} else {
+			Seller SellerId = sellerBO.getSeller(id);	
+			model.addAttribute("result2", SellerId);
+			
+		}
 		
 		return "lesson04/addInfo";
 		
