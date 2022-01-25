@@ -4,7 +4,7 @@
  
  <mapper namespace="">
  	<insert id="insertRealtor" parameterType="com.quiz.lesson04.model.Realtor"
- 	userGenertedKeys="true" >
+ 	useGeneratedKeys="true" keyProperty="id">
  	
  	</insert>
  </mapper>
