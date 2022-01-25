@@ -11,21 +11,16 @@
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 </head>
 <body>
 	<div class="container">
 
 		<h1>판매자 정보</h1>
 		
-		<div><img src=${result.profileImageUrl} alt="프로필"></div>
-		<div class="text-secondary">${result.nickname}</div>
-		<div>${result.temperature}</div>
-		
-		
-		<div><img src=${result2.profileImageUrl} alt="프로필"></div>
-		<div class="text-secondary">${result2.nickname}</div>
-		<div>${result2.temperature}</div>
+		<div><img src="${result.profileImageUrl}" alt="프로필"></div>
+		<div class="display-3">${result.nickname}</div>
+		<div class="display-4 text-warning">${result.temperature}</div>
+	
 	</div>
 </body>
 </html>

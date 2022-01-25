@@ -36,7 +36,9 @@
 		ORDER BY `id` DESC
 		LIMIT 1
 	</select>
-	<select id="selectSeller" resultType="com.quiz.lesson04.model.Seller">
+	<select id="selectSellerById" 
+	parameterType="int"
+	resultType="com.quiz.lesson04.model.Seller">
 		SELECT 
 			`id`
 			,`nickname`
@@ -47,7 +49,7 @@
 		FROM
 			`seller`
 		WHERE
-			`id` = #{id}
+			`id` = #{id} <!-- mybatis 문법임 -->  
 	</select>
 	
 </mapper>
