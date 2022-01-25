@@ -1,14 +1,19 @@
 package com.quiz.lesson04;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.quiz.lesson04.bo.RealtorBO;
 import com.quiz.lesson04.model.Realtor;
 
 @Controller
 public class Lesson04Quiz02Controller {
+	@Autowired
+	private RealtorBO realtorBO;
 	
 	//http://localhost/lesson04/quiz02/1
 	@RequestMapping("/lesson04/quiz02/1")
@@ -17,16 +22,21 @@ public class Lesson04Quiz02Controller {
 	}
 	
 	//http://localhost/lesson04/quiz02/add_realtor
-	@GetMapping("/lesson04/quiz02/add_realtor")
+	@PostMapping("/lesson04/quiz02/add_realtor")
 	public String add_realtor(
-			@ModelAttribute Realtor realtor
-			) {
+			@ModelAttribute Realtor realtor,
+			Model model	) {
 		
 		// DB insert
+		realtorBO.addRealtor(realtor);
+		
 		
 		// DB select
+		Realtor result = realtorBO.getRealtorById(realtor.getId());
+		model.addAttribute("result", result);
+		model.addAttribute("subject", "공인중개사 정보");
 		
-		return ""; // 
+		return "lesson04/afterAddRealtor"; // 
 	}
 	
 }

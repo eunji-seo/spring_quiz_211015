@@ -17,19 +17,19 @@
 		<h1>공인중개사 추가</h1>
 		<form method="post" action="/lesson04/quiz02/add_realtor">
 			<div class="form-group">
-				<label for="office"></label>
+				<label for="office">상호명</label>
 				<input type="text" id="office" name="office" class="form-control col-4">
 			</div>
 			<div class="form-group">
-				<label for="phoneNumber"></label>
+				<label for="phoneNumber">전화번호</label>
 				<input type="text" id="phoneNumber" name="phoneNumber" class="form-control col-4">
 			</div>
 			<div class="form-group">
-				<label for="address"></label>
+				<label for="address">주소</label>
 				<input type="text" id="address" name="address" class="form-control col-4">
 			</div>
 			<div class="form-group">
-				<label for="grade"></label>
+				<label for="grade">등급</label>
 				<input type="text" id="grade" name="grade" class="form-control col-4">
 			</div>
 			<input type="submit" class="btn btn-primary" value="추가">
