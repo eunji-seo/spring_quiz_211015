@@ -23,20 +23,22 @@ public class Lesson04Quiz02Controller {
 	
 	//http://localhost/lesson04/quiz02/add_realtor
 	@PostMapping("/lesson04/quiz02/add_realtor")
-	public String add_realtor(
+	public String addRealtor(
 			@ModelAttribute Realtor realtor,
 			Model model	) {
 		
-		// DB insert
+		// DB insert => id 반환을 받고
 		realtorBO.addRealtor(realtor);
 		
 		
-		// DB select
+		// DB select => 받환 받은 id로
 		Realtor result = realtorBO.getRealtorById(realtor.getId());
+		
+		// JSP에 사용할 객체를 model에 담는다.
 		model.addAttribute("result", result);
 		model.addAttribute("subject", "공인중개사 정보");
 		
-		return "lesson04/afterAddRealtor"; // 
+		return "lesson04/afterAddRealtor"; // 공인중개사 추가된 jsp
 	}
 	
 }
