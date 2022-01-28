@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSTL fmt 라이브러리</title>
+<title>Insert title here</title>
 <!-- bootstrap CDN link -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -16,54 +16,46 @@
 </head>
 <body>
 	<div class="container">
-		<h1>1. 후보자 득표율</h1>
+		<h1>회원정보리스트</h1> <%-- img src="/images/sunny.jpg" --%>
 		<table class="table text-center">
 			<thead>
 				<tr>
-					<th>기호</th>
-					<th>득표수</th>
-					<th>득표율</th>
+					<th>No</th>
+					<th>이름</th>
+					<th>전화번호</th>
+					<th>국적</th>
+					<th>이메일</th>
+					<th>자기소개</th>
 				</tr>
 			</thead>
 			<tbody>
-			<c:forEach var="item" items="${candidates}" varStatus="status">
+			<c:forEach var="member" items="${members}" varStatus="status">
 				<tr>
 					<td>${status.count}</td>
+					<td>${member.name}</td>
 					<td>
-						<fmt:formatNumber value="${item}" type="number"/>
+					<c:choose>
+						<c:when test="${fn:startsWith(member.phoneNumber, '010')}">
+							<span>${member.phoneNumber}</span>
+						</c:when>
+						<c:otherwise>
+							<span>유효하지 않는 전화번호</span>
+						</c:otherwise>
+					</c:choose>
 					</td>
 					<td>
-						<fmt:formatNumber value="${item/totalCount}" type="percent" groupingUsed="false"/>
-						
-					</td>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
-		<h1>2. 카드 명세서</h1>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>사용처</th>
-					<th>가격</th>
-					<th>사용날짜</th>
-					<th>할부</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="items" items="${cardBills}">
-				<tr>
-					<td>${items.store}</td>
-					<td>
-						<fmt:formatNumber value="${items.pay}" type="currency"  currencySymbol="₩"/>
+						${fn:replace(member.nationality, '삼국시대', '삼국 -')}
 					</td>
 					<td>
-						<fmt:parseDate value="${items.date}" pattern="yyyy-mm-dd" var="date1"/>
-						
-						<fmt:formatDate value="${date1}" pattern="yyyy년 mm월 dd일"/>
+						<b>${fn:split(member.email, '@')[0]}</b>@${fn:split(member.email, '@')[1]}
 					</td>
-					<td>
-						${items.installment}
+					<td class="test-left">
+						<c:if test="${fn:length(member.introduce) <= 15}">
+							${member.introduce}
+						</c:if>
+						<c:if test="${fn:length(member.introduce) > 15}">
+							${fn:substring(member.introduce, 0, 15)}...
+						</c:if>	
 					</td>
 				</tr>
 			</c:forEach>
