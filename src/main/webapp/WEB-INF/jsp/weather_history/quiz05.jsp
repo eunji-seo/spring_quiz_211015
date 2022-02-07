@@ -32,7 +32,7 @@ a{color: white;}
 		<div class="d-flex">
 			<header class="bg-primary">
 				<h1>기상청</h1>
-				<ul">
+				<ul>
 					<li><a href="#">날씨</a></li>
 					<li><a href="#">날씨입력</a></li>
 					<li><a href="#">테마날씨</a></li>
@@ -41,7 +41,7 @@ a{color: white;}
 			</header>
 			<section>
 				<h1>날씨 입력</h1>
-				<form method="post" action="/lesson05/quiz05/info">
+				<form method="post" action="/Weather_History_Info">
 					<div class="d-flex">
 						<div class="form-group d-flex">
 							<label for="date">날짜</label>
@@ -50,19 +50,19 @@ a{color: white;}
 						<div class="form-group d-flex">
 							<label for="weather">날씨</label>
 							<select class="col=3">
-								<option></option>
-								<option></option>
-								<option></option>
-								<option></option>
+								<option>맑음</option>
+								<option>구름조금</option>
+								<option>흐림</option>
+								<option>비</option>
 							</select>
 						</div>
 						<div class="form-group d-flex">
 							<label for="microDust">미세먼지</label>
 							<select class="col-3">
-								<option></option>
-								<option></option>
-								<option></option>
-								<option></option>
+								<option>좋음</option>
+								<option>보통</option>
+								<option>나쁨</option>
+								<option>최악</option>
 							</select>
 						</div>
 					</div>
@@ -102,8 +102,8 @@ a{color: white;}
             , dateFormat: 'yy-mm-dd'
         });
 
-        $.datepicker._gotoToday = function(id) {
-            $(id).datepicker('setDate', new Date()).datepicker('hide').blur();
+        $.datepicker._gotoToday = function(date) {
+            $(date).datepicker('setDate', new Date()).datepicker('hide').blur();
         };
 		})
 	</script>

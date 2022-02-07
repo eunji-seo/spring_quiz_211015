@@ -1,5 +1,7 @@
 package com.quiz.lesson05.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,13 +11,10 @@ import com.quiz.lesson05.model.Weatherhistory;
 public class WeatherHistoryBO {
 
 	@Autowired
-	private WeatherHistoryDAO whDAO;
+	private WeatherHistoryDAO weatherhistoryDAO;
 	
-	public void addWearherHistory(Weatherhistory weather) {
-		whDAO.insertWearherHistory(weather);
+	public List<Weatherhistory> getWeatherHistoryList() {
+		return weatherhistoryDAO.selectWeatherHistoryList();
 	}
-	
-	public Weatherhistory getWearherHistory(int id) {
-		return whDAO.selectWearherHistory(id);
-	}
+
 }

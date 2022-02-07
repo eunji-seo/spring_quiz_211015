@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>날씨정보</title>
 <!-- bootstrap CDN link -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
+	<link rel="stylesheet" type="text/css" href="/css/Weather_History.css"/>		
 <style>
 
 h1{width: 150px }
@@ -51,16 +52,31 @@ a{color: white;}
 			 			</tr>
 			 		</thead>
 			 		<tbody>
-			 		<c:forEach var="vo" items="${result}">
+			 		<c:forEach var="item" items="${Weatherhistorylist}">
 			 			<tr>
-			 				<td>${vo.data}</td>
 			 				<td>
-			 					<img src="${}"/>
+			 					<fmt:formatDate value="${item.data}" pattern="yyyy년 M월 d일"/>
 			 				</td>
-			 				<td>${vo.temperatures}</td>
-			 				<td>${vo.precipitation}</td>
-			 				<td>${vo.microDust}</td>
-			 				<td>${vo.windSpeed}</td>
+			 				<td>
+			 					<c:choose>
+			 						<c:when test="${item.weather == '맑음'}">
+			 							<img src="/images/sunny.jpg" alt="날씨">
+			 						</c:when>
+			 						<c:when test="${item.weather == '구름조금'}">
+			 							<img src="/images/partlyCloudy.jpg" alt="날씨">
+			 						</c:when>
+			 						<c:when test="${item.weather == '흐림'}">
+			 							<img src="/images/cloudy.jpg" alt="날씨">
+			 						</c:when>
+			 						<c:when test="${item.weather == '비'}">
+			 							<img src="/images/rainy.jpg" alt="날씨">
+			 						</c:when>
+			 					</c:choose>
+			 				</td>
+			 				<td>${item.temperatures}C</td>
+			 				<td>${item.precipitation}mm</td>
+			 				<td>${item.microDust}</td>
+			 				<td>${item.windSpeed}km/h</td>
 			 			</tr>
 			 		</c:forEach>
 			 		</tbody>
