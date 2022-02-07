@@ -18,7 +18,7 @@
    <!-- datepicker-->
    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
+	<link rel="stylesheet" type="text/css" href="/css/Weather_History.css"/>	
 <style>
 
 h1{width: 150px }
@@ -40,29 +40,29 @@ a{color: white;}
 				</ul>
 			</header>
 			<section>
-				<h1>날씨 입력</h1>
-				<form method="post" action="/Weather_History_Info">
+				<h3>날씨 입력</h3>
+				<form method="post" action="/add_weather_history">
 					<div class="d-flex">
 						<div class="form-group d-flex">
 							<label for="date">날짜</label>
-							<input type="text" id="date" name="date" class="form-control col-3">
+							<input type="text" id="date" name="date" class="form-control">
 						</div>
 						<div class="form-group d-flex">
 							<label for="weather">날씨</label>
-							<select class="col=3">
-								<option>맑음</option>
-								<option>구름조금</option>
-								<option>흐림</option>
-								<option>비</option>
+							<select class="col=3" name="weather">
+								<option value="맑음">맑음</option>
+								<option value="구름조금">구름조금</option>
+								<option value="흐림">흐림</option>
+								<option value="비">비</option>
 							</select>
 						</div>
 						<div class="form-group d-flex">
 							<label for="microDust">미세먼지</label>
-							<select class="col-3">
-								<option>좋음</option>
-								<option>보통</option>
-								<option>나쁨</option>
-								<option>최악</option>
+							<select class="col-3" name="microDust">
+								<option value="좋음">좋음</option>
+								<option value="보통">보통</option>
+								<option value="나쁨">나쁨</option>
+								<option value="최악">최악</option>
 							</select>
 						</div>
 					</div>
@@ -94,18 +94,14 @@ a{color: white;}
 			</div>
 		</footer>
 	</div>
-	<script>
-	$(document).ready(function() {
-       
-        $.datepicker.setDefaults({
-            dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'] // 요일을 한글로 변경
-            , dateFormat: 'yy-mm-dd'
-        });
-
-        $.datepicker._gotoToday = function(date) {
-            $(date).datepicker('setDate', new Date()).datepicker('hide').blur();
-        };
-		})
-	</script>
+<script>
+	$(document).ready(function(){
+		$('#date').datepicker({
+			dateFormat:'yy-mm-dd' // 2022-02-07
+			
+		});		
+		
+	});
+</script>
 </body>
 </html>

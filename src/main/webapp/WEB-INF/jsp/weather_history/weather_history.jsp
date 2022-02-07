@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="/css/Weather_History.css"/>		
+	
 <style>
 
 h1{width: 150px }
@@ -40,7 +40,7 @@ a{color: white;}
 				</ul>
 			</header>
 			<section>
-			 	<table>
+			 	<table class="table">
 			 		<thead>
 			 			<tr>
 			 				<th>날짜</th>
@@ -55,7 +55,7 @@ a{color: white;}
 			 		<c:forEach var="item" items="${Weatherhistorylist}">
 			 			<tr>
 			 				<td>
-			 					<fmt:formatDate value="${item.data}" pattern="yyyy년 M월 d일"/>
+			 					<fmt:formatDate value="${item.date}" pattern="yyyy년 M월 d일"/>
 			 				</td>
 			 				<td>
 			 					<c:choose>

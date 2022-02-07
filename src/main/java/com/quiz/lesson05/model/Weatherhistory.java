@@ -68,12 +68,6 @@ public class Weatherhistory {
 		this.updatedAt = updatedAt;
 	}
 	
-	@Override
-	public String toString() {
-		return "Weatherhistory [id=" + id + ", date=" + date + ", weather=" + weather + ", temperatures=" + temperatures
-				+ ", precipitation=" + precipitation + ", microDust=" + microDust + ", windSpeed=" + windSpeed
-				+ ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
-	}
 	
 	
 	
