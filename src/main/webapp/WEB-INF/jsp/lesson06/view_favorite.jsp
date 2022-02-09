@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,47 +14,25 @@
 </head>
 <body>
 	<div class="container">
-		<h1>즐거 찾기 추가하기</h1>
-		<form method="post" action="add_favorite">
-		<div class="form-group">
-			<label for="name">제목</label>
-			<input type="text" id="name" name="name" class="form-control">
-		</div>
-		<div class="form-group">
-			<label for="url">주소</label>
-			<input type="text" id="url" name="url" class="form-control">
-		</div>
-		<input type="button" id="addBtn" class="btn btn-success col-12" value="추가">
-		</form>
+		<h1>즐겨 찾기 목록</h1>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>NO.</th>
+					<th>이름</th>
+					<th>주소</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="item" items="${favorite}">
+				<tr>
+					<td>${item.id}</td>
+					<td>${item.name}</td>
+					<td>${item.url}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
-<script>
-$(document).ready(function(){
-	$('#addBtn').on('click',function(){
-		let name= $('#name').val().trim();
-		if(name.length < 1){
-			alert("제목을 입력하세요");
-			return;
-		}
-		let url = $('#url').val().trim();
-		if(url == ""){
-			alert("url을 입력해주세요");
-			return;
-		}
-		$.ajax({
-			type:'POST'
-			,url:'add_favorite'
-			,data:{'name': name, 'url':url}
-			,success: function(data){
-				alert(data);
-				location.href="http://localhost/lesson06/add_favorite"
-			}
-			,error: function(e){
-				alert("error:" + e);
-			}
-		});
-		
-	});	
-});
-</script>
 </html>
