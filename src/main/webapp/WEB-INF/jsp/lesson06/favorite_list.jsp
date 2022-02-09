@@ -24,7 +24,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="item" items="${favorite}">
+				<c:forEach var="item" items="${favoriteList}">
 				<tr>
 					<td>${item.id}</td>
 					<td>${item.name}</td>

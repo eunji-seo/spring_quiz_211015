@@ -14,8 +14,8 @@ public class FavoriteBO {
 	@Autowired
 	private FavoriteDAO favoriteDAO; 
 	
-	public void addFavoriteList(String name, String url) {
-		favoriteDAO.insertFavoriteList(name, url);
+	public void addFavorite(String name, String url) { // insert만 void
+		favoriteDAO.insertFavorite(name, url);
 	}
 	
 	public List<Favorite> getFavoriteList(){

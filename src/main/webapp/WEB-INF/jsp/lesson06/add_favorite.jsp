@@ -14,7 +14,7 @@
 <body>
 	<div class="container">
 		<h1>즐거 찾기 추가하기</h1>
-		<form method="post" action="view_favorite">
+		<form method="post" action="favorite_list">
 		<div class="form-group">
 			<label for="name">제목</label>
 			<input type="text" id="name" name="name" class="form-control">
@@ -53,8 +53,12 @@ $(document).ready(function(){
 			,url:"/lesson06/add_favorite"
 			,data:{"name": name, "url": url}  //  ajax jquery의 json 를 객체로 자동 변환 해줌 그래서 error{objact, objact} 
 			,success: function(data){ // String return이 반드시 되어야함
-				alert(data.result);
-				location.href="http://localhost/lesson06/view_favorite";
+				//alert(data.result);
+				
+				if(data.result=="success"){
+					// 목록화면으로 이동
+					location.href="http://localhost/lesson06/favorite_list"; // get 방식
+				}
 			}
 			,error: function(e){
 				alert("error:");
