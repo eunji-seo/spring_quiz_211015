@@ -79,12 +79,14 @@ public class FavoriteController {
 		
 	}
 	@RequestMapping("/lesson06/delete")
+	@ResponseBody
 	public String delete(
 			@RequestParam("id") int id
 			) {
 		
 		favoriteBO.favoriteDelete(id);
-		return"/lesson06/favorite_list";
+		
+		return "성공";
 	}
 	
 }

@@ -41,24 +41,21 @@
 		$('#delBtn').on('click',function(){
 			alert("클릭");
 		
-		$.ajax({
-			type:"GET"
-			, url:"/lesson06/is_delele"
-			, data:{id: id}
-			, success: function(data){
-				alert(data);
-				
-				
-			}
-			, error: function(e){
-				alert("error");
-			}
-		});
+			$.ajax({
+				type:"DELETE"
+				, url:"/lesson06/delele"
+				, data:{id: id}
+				, success: function(data){
+					alert(data);
+					
+					
+				}
+				, error: function(e){
+					alert("error");
+				}
+			});
 			
 		});
-		
-		
-		
 	});
 </script>		
 </body>
