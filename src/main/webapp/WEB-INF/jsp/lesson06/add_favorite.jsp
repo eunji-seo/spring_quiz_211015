@@ -14,21 +14,51 @@
 <body>
 	<div class="container">
 		<h1>즐거 찾기 추가하기</h1>
-		<form method="post" action="favorite_list">
 		<div class="form-group">
 			<label for="name">제목</label>
 			<input type="text" id="name" name="name" class="form-control">
 		</div>
 		<div class="form-group">
 			<label for="url">주소</label>
-			<input type="text" id="url" name="url" class="form-control">
+			<div class="d-flex">
+			<input type="text" id="url" name="url" class="form-control mr-3">
+			<button type="button" id="urlCheckBtn" class="btn btn-info">중복확인</button>
+			</div>
+			<small id="isDuplicationText" class="text-danger d-none" >중복된 url 입니다.</small>
+			<small id="availableUrlText" class="text-success  d-none" >저장 가능한 url 입니다.</small>
 		</div>
 		<input type="button" id="addBtn" class="btn btn-success btn-block" value="추가">
-		</form>
 	</div>
 </body>
 <script>
 $(document).ready(function(){
+	// 주소 중복 확인
+	$('#urlCheckBtn').on('click', function(){
+		let url = $('#url').val().trim();
+		if(url == ''){
+			alert("검사할 URL을 입력해주세요")
+			return;
+		}
+		$.ajax({
+			type: "POST"
+			, url: "/lesson06/is_duplication_url"
+			, data: {"url":url}
+			, success: function(data){
+				data.result
+				if(data.result == true){
+					//중복일 때
+					$('#isDuplicationText').removeClass("d-none");
+					$('#availableUrlText').addClass("d-none");
+				} else {
+					//중복이 아닐때
+					$('#availableUrlText').removeClass("d-none");
+					$('#isDuplicationText').addClass("d-none");
+				}
+			}
+		});
+	});
+
+	// 즐거찾기 추가
 	$('#addBtn').on('click',function(){
 		let name= $('#name').val().trim();
 		if(name.length < 1){
@@ -47,6 +77,13 @@ $(document).ready(function(){
 			return;
 		}
 		
+		// quiz02 - 중복확인 체크
+		if($('#availableUrlText').hasClass("d-none")){
+			// 저장 가능 URL 문구가 없으면 검사를 다시 해야함
+			alert("다시 중복 확인을 해주세요.");
+			return;
+		}
+		
 		// 서버로 호출
 		$.ajax({ // request 
 			type:"POST"
@@ -57,13 +94,14 @@ $(document).ready(function(){
 				
 				if(data.result=="success"){
 					// 목록화면으로 이동
-					location.href="http://localhost/lesson06/favorite_list"; // get 방식
+					location.href="/lesson06/favorite_list"; // 절대경로로 지정하여야 한다 get 방식
 				}
 			}
 			,error: function(e){
 				alert("error:");
 			}
 		});
+		
 		
 	});	
 });

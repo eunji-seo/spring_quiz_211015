@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,7 +49,7 @@ public class FavoriteController {
 	
 	// 즐겨찾기 목록 화면
 
-	@RequestMapping("/lesson06/favorite_list_view") // location.href get 방식
+	@RequestMapping("/lesson06/favorite_list") // location.href get 방식
 	public String favoriteListView(Model model) {
 		
 		// select
@@ -58,4 +57,34 @@ public class FavoriteController {
 		model.addAttribute("favoriteList", favoriteList);
 		return"lesson06/favorite_list";
 	}
+	// 주소 중복 확인 - AJAX 통신 호출
+	@ResponseBody
+	@PostMapping("/lesson06/is_duplication_url")
+	public Map<String, Boolean> isDuplicationUrl(
+			@RequestParam("url") String url
+			){
+		// DB 중복확인 
+		
+		Favorite favorite = favoriteBO.getFavoriteByUrl(url);
+		
+		Map<String, Boolean> result = new HashMap<>();
+		result.put("result", true);
+		
+		if(favorite == null) {
+			// 중복 되지 않음
+			result.put("result", false);			
+		}
+		
+		return result;
+		
+	}
+	@RequestMapping("/lesson06/delete")
+	public String delete(
+			@RequestParam("id") int id
+			) {
+		
+		favoriteBO.favoriteDelete(id);
+		return"/lesson06/favorite_list";
+	}
+	
 }

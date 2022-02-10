@@ -21,6 +21,7 @@
 					<th>NO.</th>
 					<th>이름</th>
 					<th>주소</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -29,10 +30,36 @@
 					<td>${item.id}</td>
 					<td>${item.name}</td>
 					<td>${item.url}</td>
+					<td><button type="button" id="delBtn" class="btn btn-danger">삭제</button></td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+<script>
+	$(document).ready(function(){
+		$('#delBtn').on('click',function(){
+			alert("클릭");
+		
+		$.ajax({
+			type:"GET"
+			, url:"/lesson06/is_delele"
+			, data:{id: id}
+			, success: function(data){
+				alert(data);
+				
+				
+			}
+			, error: function(e){
+				alert("error");
+			}
+		});
+			
+		});
+		
+		
+		
+	});
+</script>		
 </body>
 </html>
