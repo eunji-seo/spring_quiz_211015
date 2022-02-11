@@ -30,7 +30,13 @@
 					<td>${item.id}</td>
 					<td>${item.name}</td>
 					<td>${item.url}</td>
-					<td><button type="button" id="delBtn" class="btn btn-danger">삭제</button></td>
+					<td>
+						<%-- 1) name 속성과 value 속성을 이용해서 삭제버튼 감지--%>
+						<%--<button type="button" name="delBtn" class="btn btn-danger" value="${item.id}">삭제</button> --%> 
+						<%-- 2) data를 이용해서 태그에 임시 저장해놓기 --%>
+						<button type="button" class="del-btn btn btn-danger" data-favorite-id="${item.id}">삭제</button>
+						<%-- data-favorite-id 카멜로 하게되면 동작 안됨 무조건 하이픈--%>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -38,23 +44,37 @@
 	</div>
 <script>
 	$(document).ready(function(){
-		$('#delBtn').on('click',function(){
-			alert("클릭");
+		// 1) name 속성과 value 속성을 이용해서 삭제버튼 감지
+		/*  $('td').on('click', 'button[name=delBtn]', function(e){
+			let id = e.target.value // this와 동일함
+			//let id = $(this).attr('value');
+				alert(id);
+		}); */
 		
+		// 2) data를 이용해서 태그에 임시 저장해놓기
+		// 태그 : data-favorite-id 속성 data- 그 뒤부터는 우리가 이름을 정한다.(반드시 - , 카멜 x)
+		// 자바스크립트: $(this).data('favorite-id');
+		$('.del-btn').on('click',function(){
+			let id = $(this).data('favorite-id'); // key : favorite-id 
+			//alert(id);
+			
 			$.ajax({
-				type:"DELETE"
-				, url:"/lesson06/delele"
-				, data:{id: id}
-				, success: function(data){
-					alert(data);
-					
-					
+				type:"POST"
+				, url:"/lesson06/delete_favorite"
+				, data: {"id":id}
+				, success: function(data){ // 
+					//alert(data.result);
+					if(data.result == 'success'){
+						// 새로고침
+						location.reload(true);
+					} else {
+						alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+					}
 				}
-				, error: function(e){
-					alert("error");
+				,error: function(e){ // 통신에서 에러 
+					alert("에러");
 				}
 			});
-			
 		});
 	});
 </script>		

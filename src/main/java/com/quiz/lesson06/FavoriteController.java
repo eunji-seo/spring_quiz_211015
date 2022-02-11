@@ -78,15 +78,23 @@ public class FavoriteController {
 		return result;
 		
 	}
-	@RequestMapping("/lesson06/delete")
+	// 즐겨찾기 삭제 - AJAX 호출 
+	@PostMapping("/lesson06/delete_favorite")
 	@ResponseBody
-	public String delete(
+	public Map<String, String> deleteFavorite(
 			@RequestParam("id") int id
 			) {
+		// DB delete
+		int deleteRowCount = favoriteBO.deleteFavoriteById(id);
 		
-		favoriteBO.favoriteDelete(id);
+		Map<String, String> result = new HashMap<>(); // 서버에서 넘어오는지, 클라이언트에서 넘어오는지 확인 디버깅 필요
+		result.put("result", "success"); 
 		
-		return "성공";
+		if(deleteRowCount < 1) {
+			result.put("result", "fail"); 	// ajax 에서 성공은 했지만 result에서 에러	
+		}
+		
+		return result;
 	}
 	
 }
