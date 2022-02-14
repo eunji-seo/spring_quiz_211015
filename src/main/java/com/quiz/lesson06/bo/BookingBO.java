@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.quiz.lesson06.dao.BookingDAO;
 import com.quiz.lesson06.model.Booking;
@@ -14,7 +15,15 @@ public class BookingBO {
 	@Autowired
 	private BookingDAO bookingDAO;
 	
-	public List<Booking> getbookingList() {
+	public List<Booking> getBookingList() {
 		return bookingDAO.selectBookingList();
+	}
+	
+	public int deleteBookingById(int id) {
+		return bookingDAO.deleteBookingById(id);
+	}
+	
+	public void addBookingList(String name, String date, int day, int headcount, String phoneNumber) {
+		bookingDAO.insertBookingList(name, date, day, headcount, phoneNumber);
 	}
 }

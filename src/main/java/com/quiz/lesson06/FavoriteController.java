@@ -27,6 +27,7 @@ public class FavoriteController {
 		return"lesson06/add_favorite";
 	}
 	
+	//http://localhost/lesson06/add_favorite
 	// 즐겨찾기 추가 기능 - AJAX 호출로 들어오는 요청
 	@PostMapping("lesson06/add_favorite")
 	@ResponseBody	// Model 사용 불가 (view 에서만 사용가능)

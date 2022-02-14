@@ -87,7 +87,7 @@ $(document).ready(function(){
 		// 서버로 호출
 		$.ajax({ // request 
 			type:"POST"
-			,url:"/lesson06/add_favorite"
+			,url:"/booking/add_favorite"
 			,data:{"name": name, "url": url}  //  ajax jquery의 json 를 객체로 자동 변환 해줌 그래서 error{objact, objact} 
 			,success: function(data){ // String return이 반드시 되어야함
 				//alert(data.result);
