@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quiz.lesson06.bo.BookingBO;
 import com.quiz.lesson06.model.Booking;
+import com.quiz.lesson06.model.Favorite;
 
 @Controller
 public class BookingController {
@@ -78,9 +79,25 @@ public class BookingController {
 			return"lesson06/lookup_booking";
 		}
 	
-		@PostMapping("")
 		@ResponseBody
-		public List<Booking> lookupBookingList(){
+		@PostMapping("/lesson06/is_duplication")
+		public Map<String, Boolean> isDuplicationUrl(
+				@RequestParam("name") String name,
+				@RequestParam("phoneNumber") String phoneNumber				
+				){
+			// DB 중복확인 
+			
+			Booking booking = bookingBO.getBookingBy(name, phoneNumber);
+			
+			Map<String, Boolean> result = new HashMap<>();
+			result.put("result", true);
+			
+			if(booking == null) {
+				// 중복 되지 않음
+				result.put("result", false);			
+			}
+			
+			return result;
 			
 		}
 

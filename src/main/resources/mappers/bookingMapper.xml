@@ -46,4 +46,18 @@
  			, NOW()
  		)
  	</insert>
+ 	<select id="getBookingBy" resultType="com.quiz.lesson06.model.Booking">
+ 		SELECT
+ 			`id`
+			,`name`
+			,`headcount`
+			,`day`
+			,`date`
+			,`phoneNumber`
+			,`state`
+			,`createdAt`
+			,`updatedAt`
+		FROM
+			`booking`
+ 	</select>
  </mapper>

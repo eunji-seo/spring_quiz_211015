@@ -21,5 +21,7 @@ public interface BookingDAO {
 			@Param("day") int day, 
 			@Param("headcount") int headcount, 
 			@Param("phoneNumber") String phoneNumber);
+	
+	public Booking getBookingBy(String name, String phoneNumber);
 }
 

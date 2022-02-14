@@ -67,16 +67,29 @@ $(document).ready(function(){
         }
     }, 3000); // 3초에 한번씩 함수 실행
 	// 예약조회
-    $('#lookupBtn').on(function(){
+    $('#lookupBtn').on('click',function(){
     	let name = $('#name').val().trim();
+    	if(name == ""){
+    		alert("이름을 입력해주세요.")
+    		return;
+    	}
     	let phoneNumber = $('#phoneNumber').val().trim();
-    	
+    	if(phoneNumber == ""){
+    		alert("전화번호를 입력해주세요.")
+    		return;
+    	}
+
     	$.ajax({
     		type:"POST"
-    		,url:"/lesson06/lookup_booking"
+    		,url:"/lesson06/is_duplication"
     		,data:{"name": name, "phoneNumber":phoneNumber}
     		,success: function(data){
-    			
+    			if(data.result == 'success'){
+					// 새로고침
+					alert(data);
+				} else {
+					alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
+				}
     		}
     		,error: function(e){
     			alert("에러");
