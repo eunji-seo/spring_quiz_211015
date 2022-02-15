@@ -15,7 +15,7 @@ public interface BookingDAO {
 	
 	public int deleteBookingById(int id);
 	
-	public void insertBookingList(
+	public int insertBookingList(
 			@Param("name") String name, 
 			@Param("date") String date, 
 			@Param("day") int day, 

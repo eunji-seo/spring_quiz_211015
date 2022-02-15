@@ -23,8 +23,8 @@ public class BookingBO {
 		return bookingDAO.deleteBookingById(id);
 	}
 	
-	public void addBookingList(String name, String date, int day, int headcount, String phoneNumber) {
-		bookingDAO.insertBookingList(name, date, day, headcount, phoneNumber);
+	public int addBookingList(String name, String date, int day, int headcount, String phoneNumber) {
+		return bookingDAO.insertBookingList(name, date, day, headcount, phoneNumber);
 	}
 	
 	public Booking getBookingBy(String name, String phoneNumber) {

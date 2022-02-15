@@ -17,7 +17,7 @@ aside{background:brown;}
 .benner{wdith:100%}
 .nav-link{color:white}
 .booking_lookup{background:orange;}
-.logo{color:black}
+h1>.logo{color:black; text-decoration: none}
 </style>
 <body>
 	<div class="container">
@@ -84,12 +84,7 @@ $(document).ready(function(){
     		,url:"/lesson06/is_duplication"
     		,data:{"name": name, "phoneNumber":phoneNumber}
     		,success: function(data){
-    			if(data.result == 'success'){
-					// 새로고침
-					alert(data);
-				} else {
-					alert("삭제하는데 실패했습니다. 관리자에게 문의해주세요.");
-				}
+    			
     		}
     		,error: function(e){
     			alert("에러");

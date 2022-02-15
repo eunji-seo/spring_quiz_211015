@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.quiz.lesson06.bo.BookingBO;
 import com.quiz.lesson06.model.Booking;
-import com.quiz.lesson06.model.Favorite;
 
 @Controller
 public class BookingController {
@@ -28,20 +28,23 @@ public class BookingController {
 		
 		List<Booking> booking= bookingBO.getBookingList(); 
 		
-		model.addAttribute("booking", booking);
+		model.addAttribute("booking", booking); // 서버는 => 원본 data > 받아서 처리 => view
 		return "lesson06/booking_list";
 	}
-	
-	@PostMapping("/lesson06/delete_booking")
-	@ResponseBody
-	public Map<String, String> bookingDelete(
+	// 예약 삭제
+	@DeleteMapping("/lesson06/delete_booking")
+	@ResponseBody // data String ajax 
+	public Map<String, String> deleteBooking(
 			@RequestParam("id") int id
 			){
-		int bookingRowCut = bookingBO.deleteBookingById(id);
+		
+		// delete query
+		int count = bookingBO.deleteBookingById(id);
+		
 		Map<String, String> result = new HashMap<>();
 		result.put("result", "success");
 		
-		if(bookingRowCut < 1) {
+		if(count < 1) {
 			result.put("result", "fail");
 		}
 		return result;
@@ -52,8 +55,7 @@ public class BookingController {
 	public String addBookingView() {
 		return"lesson06/add_booking";
 	}
-	
-	//http://localhost/lesson06/add_booking
+	// 예약하기 추가 - AJAX
 	@PostMapping("/lesson06/add_booking")
 	@ResponseBody
 	public Map<String, String> addBooking(
@@ -63,12 +65,21 @@ public class BookingController {
 			@RequestParam("headcount")int headcount,
 			@RequestParam("phoneNumber")String phoneNumber
 			){
+		
+			// state: 대기중 
 		//insert
 		
-		bookingBO.addBookingList(name, date, day, headcount, phoneNumber);
+		int count = bookingBO.addBookingList(name, date, day, headcount, phoneNumber);
 		
+		// result Map => json
 		Map<String, String> result = new HashMap<>();
-		result.put("result", "success");
+		result.put("result", "success"); 
+		result.put("code", "1"); // 코드로 판별 가능 
+		
+		if(count < 1) {
+			result.put("result", "fail");
+			result.put("code", "500");
+		}
 		
 		return result;
 	}
@@ -81,7 +92,7 @@ public class BookingController {
 	
 		@ResponseBody
 		@PostMapping("/lesson06/is_duplication")
-		public Map<String, Boolean> isDuplicationUrl(
+		public Map<String, Boolean> isDuplication(
 				@RequestParam("name") String name,
 				@RequestParam("phoneNumber") String phoneNumber				
 				){

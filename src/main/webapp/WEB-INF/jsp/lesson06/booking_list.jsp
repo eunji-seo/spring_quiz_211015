@@ -9,8 +9,9 @@
 <meta charset="UTF-8">
 <title>예약 목록 보기</title>
 <!-- bootstrap CDN link -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="crossorigin="anonymous"></script>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
@@ -18,18 +19,18 @@
 nav{background:orange;}
 .nav-link{color:white}
 .booking_lookup{background:orange;}
-.logo{color:black
+h1>.logo{color:black; text-decoration: none}
 </style>
 <body>
 	<div class="container">
 	<header>
-		<h1 class="text-center"><a class="logo" href="http://localhost/lesson06/lookup_booking">통나무 팬션</a></h1>
+		<h1 class="text-center"><a class="logo" href="/lesson06/lookup_booking_view">통나무 팬션</a></h1>
 		<nav>
 			<ul class="nav nav-fill">
 				<li class="nav-item"><a href="#" class="nav-link">팬션소개</a></li> 
 				<li class="nav-item"><a href="#" class="nav-link">객실보기</a></li> 
-				<li class="nav-item"><a href="http://localhost/lesson06/add_booking_view" class="nav-link">예약하기</a></li> 
-				<li class="nav-item"><a href="http://localhost/lesson06/booking_list_view" class="nav-link">예약목록</a></li> 
+				<li class="nav-item"><a href="/lesson06/add_booking_view" class="nav-link">예약하기</a></li> 
+				<li class="nav-item"><a href="/lesson06/booking_list_view" class="nav-link">예약목록</a></li> 
 			</ul>
 		</nav>
 	</header>
@@ -51,7 +52,7 @@ nav{background:orange;}
 			<c:forEach var="item" items="${booking}">
 				<tr>
 					<td>${item.name}</td>
-					<td>
+					<td> <%-- pause(data) , format(String) --%>
 						<fmt:formatDate value="${item.date}" pattern="yyyy년 M월 d일"/>
 					</td>
 					<td>${item.day}</td>
@@ -65,9 +66,9 @@ nav{background:orange;}
 							<c:when test="${item.state eq '대기중'}">
 								<spen class="text-primary">${item.state}</spen>
 							</c:when>
-							<c:otherwise>
+							<c:when test="${item.state eq '취소'}">
 								<spen class="text-danger">${item.state}</spen>
-							</c:otherwise>
+							</c:when>
 						</c:choose>
 						
 					</td>
@@ -91,19 +92,16 @@ $(document).ready(function(){
 			let id = $(this).data('booking-id');
 			
 			$.ajax({
-				type:"POST"
+				type:"DELETE"
 				,url:"/lesson06/delete_booking"
 				,data:{"id":id}
 				,success: function(data){
-					if(data.result == 'success'){
+					if(data.result == "success"){
 						location.reload();
-					} else{
-						alert("관리자에게 문의해주세요");
-					}
-					
+					} 
 				}
 				,error: function(e){
-					alert("에러");
+					alert("예약하는데 실패했습니다.");
 				}
 			});
 		});
