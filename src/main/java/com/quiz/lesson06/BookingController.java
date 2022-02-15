@@ -66,10 +66,12 @@ public class BookingController {
 			@RequestParam("phoneNumber")String phoneNumber
 			){
 		
-			// state: 대기중 
+			 
 		//insert
 		
 		int count = bookingBO.addBookingList(name, date, day, headcount, phoneNumber);
+		// state: 대기중 (Mapper)
+		
 		
 		// result Map => json
 		Map<String, String> result = new HashMap<>();
@@ -90,23 +92,36 @@ public class BookingController {
 			return"lesson06/lookup_booking";
 		}
 	
+		// 예약 조회 - AJAX
 		@ResponseBody
-		@PostMapping("/lesson06/is_duplication")
-		public Map<String, Boolean> isDuplication(
+		@PostMapping("/lesson06/look_up_booking")
+		public Map<String, Object> lookUpBooking(
 				@RequestParam("name") String name,
 				@RequestParam("phoneNumber") String phoneNumber				
 				){
-			// DB 중복확인 
+			// DB select by name, phoneNumber
 			
-			Booking booking = bookingBO.getBookingBy(name, phoneNumber);
+			Booking booking = bookingBO.getBookingByNameAndPhoneNumber(name, phoneNumber);
+			// 결과 map -> json
+			Map<String, Object> result = new HashMap<>();
 			
-			Map<String, Boolean> result = new HashMap<>();
-			result.put("result", true);
 			
-			if(booking == null) {
-				// 중복 되지 않음
-				result.put("result", false);			
+			if(booking != null) {
+				// 성공시 
+				// {"result" : "success",
+				//	"code" : "1",
+				//  "booking" : {"name": 신보람, "phoneNumber": 010-1234-5678 }}
+				result.put("result", "success");
+				result.put("code", 1);
+				result.put("booking", booking);
+				
+			} else {
+				// 실패시 
+				//{ "result" : "fail", "code":"500", "message": "에러 원인"}
+				result.put("result", "fail");
+				result.put("code", 500);
 			}
+			
 			
 			return result;
 			

@@ -48,7 +48,8 @@
  			, NOW()
  		)
  	</insert>
- 	<select id="getBookingBy" resultType="com.quiz.lesson06.model.Booking">
+ 	<select id="selectBookingByNameAndPhoneNumber" parameterType="map"
+ 		resultType="com.quiz.lesson06.model.Booking">
  		SELECT
  			`id`
 			,`name`
@@ -61,5 +62,8 @@
 			,`updatedAt`
 		FROM
 			`booking`
+		WHERE
+			`name` = #{name}
+			AND `phoneNumber` = #{phoneNumber}
  	</select>
  </mapper>
